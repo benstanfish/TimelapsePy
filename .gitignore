@@ -1,6 +1,11 @@
 __pycache__
 
+test/
+archive/
+dev/
 
-.ipynb_checkpoints/
 *.ipynb
-!Module Test Template.ipynb
+.ipynb_checkpoints/
+
+
+

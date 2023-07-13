@@ -1,5 +1,10 @@
+__version__ = "0.0.1"
+
 import os
 from datetime import datetime
+
+
+print("utilities.py successfully imported")
 
 displays = {
             'VGA': (640,480),
@@ -13,8 +18,11 @@ displays = {
             '4K':(3840,2160)
             }
 
-def getTimeStamp():
-    return datetime.now().strftime('%Y-%m-%d--%H%M%S')
+def getTimeStamp(includeMs: bool = False):
+    if includeMs == True:
+        return datetime.now().strftime('%Y%m%d--%H%M%S-%f')
+    else:
+        return datetime.now().strftime('%Y%m%d--%H%M%S')
 
 def buildPath(path):
     if os.path.exists(path) == False:
@@ -22,6 +30,7 @@ def buildPath(path):
     else:
         path = nextPath(path)
         os.mkdir(path)
+    return path
 
 def nextPath(path):
     """Creates a candidate path name that will not conflict with indexed predecessors.
