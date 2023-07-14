@@ -19,7 +19,7 @@ logger.addHandler(fileHandler)
 logger.addHandler(consoleHandler)
 
 lmsg = {
-		0: "-"*50,
+		0: "-"*75,
 		1: "",
 		2: "TimelapsePy script initialized",
 		3: "imports complete",

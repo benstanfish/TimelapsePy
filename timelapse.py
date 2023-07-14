@@ -1,7 +1,7 @@
 import tlogger as tl
 tl.logger.info(tl.lmsg[0])
 
-try:	
+try:
 	from picamera2 import Picamera2, Preview
 	from libcamera import Transform, controls
 	import time, datetime
@@ -11,20 +11,21 @@ try:
 	tl.logger.info(tl.lmsg[2])
 
 	picam2 = Picamera2()
-	picam2.preview_configuration.main.size = (3840,2160)
-	picam2.preview_configuration.main.format = "RGB888"
-	picam2.preview_configuration.transform = Transform(hflip=1,vflip=1)
-	picam2.preview_configuration.align()
-	picam2.configure("preview")
+	picam2.still_configuration.main.size = tu.displays['4K']
+	picam2.still_configuration.main.format = 'XBGR8888'
+	picam2.still_configuration.transform = Transform(hflip=True,vflip=True)
+	#picam2.still_configuration.align()
+	picam2.configure('still')
 	picam2.start()
 
-	picam2.set_controls({"AfMode":controls.AfModeEnum.Manual, "LensPosition":0.0})
-
+	picam2.set_controls({"AfMode":controls.AfModeEnum.Manual,"LensPosition":0.0,"AeEnable": False, "AwbEnable": False, "FrameRate": 1.0})
+	time.sleep(1)
+	
 	tl.logger.info(tl.lmsg[3])
 
 	# User Inputs
 	number_images = 5
-	capture_interval = 0.1
+	capture_interval = 1
 	folder_name = 'timelapse'
 	create_mp4 = False
 	
@@ -35,6 +36,7 @@ try:
 
 	tl.logger.info(tl.lmsg[5].format(images_dir))
 	tl.logger.info(tl.lmsg[6])
+	
 	
 	for i in range(1,number_images + 1):
 		img_path = os.path.join(images_dir,'{}.jpg'.format(tu.getTimeStamp(True)))
