@@ -6,3 +6,5 @@ Traceback (most recent call last):
 ModuleNotFoundError: No module named 'picamera2'
 2023-07-25 23:47:42,951 - timelapsepy - INFO - end of script
 2023-07-26 09:11:29,784 - timelapsepy - INFO - Test Initialized.
+2023-07-26 14:19:03,937 - timelapsepy - INFO - Test Initialized.
+2023-07-26 14:19:27,777 - timelapsepy - INFO - Test Initialized.

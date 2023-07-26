@@ -2,7 +2,7 @@ __version__ = "0.0.1"
 
 import os
 import getpass
-from datetime import datetime
+import datetime as dt
 
 print(f"tutilities.py <version {__version__}> imported.")
 
@@ -21,12 +21,12 @@ displays = {
 def get_timestamp(includeMs: bool = False):
     # LEGACY: Do not use for new projects
     if includeMs == True:
-        return datetime.now().strftime('%Y%m%d--%H%M%S-%f')
+        return dt.datetime.now().strftime('%Y%m%d--%H%M%S-%f')
     else:
-        return datetime.now().strftime('%Y%m%d--%H%M%S')
+        return dt.datetime.now().strftime('%Y%m%d--%H%M%S')
 
 def get_time_stamp():
-    return datetime.now().strftime('%Y%m%d%H%M%S.%f')
+    return dt.datetime.now().strftime('%Y%m%d%H%M%S.%f')
 
 def build_path(path):
     if os.path.exists(path) == False:
