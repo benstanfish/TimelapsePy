@@ -24,3 +24,5 @@ ModuleNotFoundError: No module named 'picamera2'
 2023-07-26 15:29:18,845 - timelapsepy - INFO - Test Initialized.
 2023-07-26 15:29:33,221 - timelapsepy - INFO - Test Initialized.
 2023-07-26 15:29:52,731 - timelapsepy - INFO - Test Initialized.
+2023-07-26 15:35:04,573 - timelapsepy - INFO - Test Initialized.
+2023-07-26 15:35:22,306 - timelapsepy - INFO - Test Initialized.

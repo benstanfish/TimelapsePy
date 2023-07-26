@@ -54,7 +54,7 @@ def check_usb(drive_name):
 def get_preferred_path(directory_name, drive_name, iterate_name = False):
     usb_path = str('/media/' + getpass.getuser() + '/' + drive_name)
     if os.path.exists(usb_path) == True:
-        path = build_path(os.path.join(usb_path, directory_name, iterate_name))
+        path = build_path(os.path.join(usb_path, directory_name), iterate_name)
     else:
         path = build_path(os.path.join(os.path.join(os.path.expanduser('~'),'Pictures'), directory_name), iterate_name)
     return path
