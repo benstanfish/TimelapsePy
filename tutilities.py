@@ -4,8 +4,7 @@ import os
 import getpass
 from datetime import datetime
 
-
-print("utilities.py successfully imported")
+print(f"tutilities.py <version {__version__}> imported.")
 
 displays = {
             'VGA': (640,480),
@@ -20,10 +19,14 @@ displays = {
             }
 
 def get_timestamp(includeMs: bool = False):
+    # LEGACY: Do not use for new projects
     if includeMs == True:
         return datetime.now().strftime('%Y%m%d--%H%M%S-%f')
     else:
         return datetime.now().strftime('%Y%m%d--%H%M%S')
+
+def get_time_stamp():
+    return datetime.now().strftime('%Y%m%d%H%M%S.%f')
 
 def build_path(path):
     if os.path.exists(path) == False:
@@ -34,15 +37,7 @@ def build_path(path):
     return path
 
 def next_path(path):
-    """Creates a candidate path name that will not conflict with indexed predecessors.
-    Uses log(n) time algorithm to check existence of predecessor names (rather than
-    using sequential iteration)
-
-    Args:
-        path (string): path
-
-    Returns:
-        string: next path
+    """Creates a candidate path name that will not conflict with indexed predecessors. Uses log(n) time algorithm to check existence of predecessor names (rather than using sequential iteration)
     """
     i = 1
     while os.path.exists(path + " " + str(i)):
@@ -64,3 +59,8 @@ def get_preferred_path(directory_name, drive_name):
         path = build_path(os.path.join(os.path.join(os.path.expanduser('~'),'Pictures'), directory_name))
     return path
   
+def get_hour_and_minute():
+    now = dt.datetime.now()
+    h = int(dt.datetime.strftime(now, "%H"))
+    m = int(dt.datetime.strftime(now, "%M")) 
+    return h, m

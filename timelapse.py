@@ -41,7 +41,7 @@ try:
 	tl.logger.info(tl.lmsg[6])
 	
 	for i in range(1,number_images + 1):
-		img_path = os.path.join(images_dir,'{}.jpg'.format(tu.get_timestamp(True)))
+		img_path = os.path.join(images_dir,'{}.jpg'.format(tu.get_time_stamp()))
 		picam2.capture_file(img_path)
 		percent_complete = ('{:.1%}'.format(i/(number_images))).rjust(7," ")
 		status = " ".join([str(i), percent_complete, img_path])
