@@ -23,7 +23,7 @@ while h < 16:
             is_sleeping = False
             i = 0    
             os.system('echo Good Morning')
-        os.system(f'echo {n}, {i}, <capture>, {dt.datetime.now()}')
+        os.system(f'echo {n}, {i}, -capture-, {dt.datetime.now()}')
     else:
         is_sleeping = True
         i = 0
