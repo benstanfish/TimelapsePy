@@ -28,10 +28,10 @@ def get_timestamp(includeMs: bool = False):
 def get_time_stamp():
     return dt.datetime.now().strftime('%Y%m%d%H%M%S.%f')
 
-def build_path(path):
+def build_path(path, iterate_name = False):
     if os.path.exists(path) == False:
         os.mkdir(path)
-    else:
+    elif iterate_name == True:
         path = next_path(path)
         os.mkdir(path)
     return path
@@ -51,12 +51,12 @@ def next_path(path):
 def check_usb(drive_name):
     return os.path.exists('/media/' + getpass.getuser() + '/' + drive_name)
 
-def get_preferred_path(directory_name, drive_name):
+def get_preferred_path(directory_name, drive_name, iterate_name = False):
     usb_path = str('/media/' + getpass.getuser() + '/' + drive_name)
     if os.path.exists(usb_path) == True:
-        path = build_path(os.path.join(usb_path, directory_name))
+        path = build_path(os.path.join(usb_path, directory_name, iterate_name))
     else:
-        path = build_path(os.path.join(os.path.join(os.path.expanduser('~'),'Pictures'), directory_name))
+        path = build_path(os.path.join(os.path.join(os.path.expanduser('~'),'Pictures'), directory_name), iterate_name)
     return path
   
 def get_hour_and_minute():
