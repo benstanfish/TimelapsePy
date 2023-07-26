@@ -10,6 +10,9 @@ import tutilities as tu
 
 tl.logger.info("Test Initialized.")
 
+folder_name = 'test'
+save_dir = tu.get_preferred_path(folder_name, 'Pullman')
+
 is_sleeping = True
 interval_seconds = 10
 n = 0
@@ -24,6 +27,7 @@ while h < 16:
             i = 0    
             os.system('echo Good Morning')
         os.system(f'echo {n}, {i}, -capture-, {dt.datetime.now()}')
+        img_path = os.path.join(save_dir,'{}.txt'.format(tu.get_time_stamp()))
     else:
         is_sleeping = True
         i = 0
