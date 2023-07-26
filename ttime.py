@@ -8,6 +8,8 @@ import datetime as dt
 import tlogger as tl
 import tutilities as tu
 
+print("Loaded")
+
 tl.logger.info("Test Initialized.")
 
 is_sleeping = True
