@@ -27,7 +27,7 @@ while h < 16:
     else:
         is_sleeping = True
         i = 0
-        os.system('echo Sleeping')
+        os.system(f'echo {n}, Sleeping, {dt.datetime.now()}')
     sleep(interval_seconds)
     h, m = tu.get_hour_and_minute()
     n += 1
