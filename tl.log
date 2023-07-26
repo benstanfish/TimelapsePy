@@ -1,0 +1,7 @@
+2023-07-25 23:47:42,948 - timelapsepy - INFO - ---------------------------------------------------------------------------
+2023-07-25 23:47:42,950 - timelapsepy - ERROR - error at division
+Traceback (most recent call last):
+  File "C:\Users\benst\Documents\_0 Workspace\py\TimelapsePy\TimelapsePy\timelapse.py", line 5, in <module>
+    from picamera2 import Picamera2, Preview
+ModuleNotFoundError: No module named 'picamera2'
+2023-07-25 23:47:42,951 - timelapsepy - INFO - end of script

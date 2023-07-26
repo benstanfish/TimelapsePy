@@ -32,14 +32,14 @@ try:
 	tl.logger.info(tl.lmsg[4])
 
 	pictures_dir = os.path.join(os.path.expanduser('~'),'Pictures')
-	images_dir = tu.buildPath(os.path.join(pictures_dir,folder_name))
+	images_dir = tu.build_path(os.path.join(pictures_dir,folder_name))
 
 	tl.logger.info(tl.lmsg[5].format(images_dir))
 	tl.logger.info(tl.lmsg[6])
 	
 	
 	for i in range(1,number_images + 1):
-		img_path = os.path.join(images_dir,'{}.jpg'.format(tu.getTimeStamp(True)))
+		img_path = os.path.join(images_dir,'{}.jpg'.format(tu.get_timestamp(True)))
 		picam2.capture_file(img_path)
 		percent_complete = ('{:.1%}'.format(i/(number_images))).rjust(7," ")
 		status = " ".join([str(i), percent_complete, img_path])

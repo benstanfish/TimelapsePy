@@ -1,6 +1,7 @@
 __version__ = "0.0.1"
 
 import os
+import getpass
 from datetime import datetime
 
 
@@ -18,21 +19,21 @@ displays = {
             '4K': (3840,2160),
             }
 
-def getTimeStamp(includeMs: bool = False):
+def get_timestamp(includeMs: bool = False):
     if includeMs == True:
         return datetime.now().strftime('%Y%m%d--%H%M%S-%f')
     else:
         return datetime.now().strftime('%Y%m%d--%H%M%S')
 
-def buildPath(path):
+def build_path(path):
     if os.path.exists(path) == False:
         os.mkdir(path)
     else:
-        path = nextPath(path)
+        path = next_path(path)
         os.mkdir(path)
     return path
 
-def nextPath(path):
+def next_path(path):
     """Creates a candidate path name that will not conflict with indexed predecessors.
     Uses log(n) time algorithm to check existence of predecessor names (rather than
     using sequential iteration)
@@ -51,3 +52,16 @@ def nextPath(path):
         c = (a + b ) // 2
         a, b = (c, b) if os.path.exists(path + " " + str(c)) else (a, c)
     return path + " " + str(b)
+
+def check_usb(drive_name):
+    return os.path.exists('/media/' + getpass.getuser() + '/' + drive_name)
+
+def get_preferred_path(directory_name, drive_name):
+    usb_path = str('/media/' + getpass.getuser() + '/' + drive_name)
+    picture_path = os.path.join(os.path.expanduser('Pictures'), directory_name)
+    if os.path.exists(usb_path) == True:
+        path = build_path(os.path.join(usb_path, directory_name))
+    else:
+        path = build_path(picture_path)
+    return path
+  
