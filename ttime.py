@@ -22,7 +22,7 @@ i = 0
 h, m = tu.get_hour_and_minute()
 
 os.system('echo Program initialized')
-while h < 16:
+while h < 18:
     if (m >= 0) & (m < 11) | (m >= 20) & (m < 31) | (m >= 40) & (m < 51):
         if is_sleeping == True:
             is_sleeping = False
