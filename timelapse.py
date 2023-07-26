@@ -13,14 +13,17 @@ try:
 	picam2 = Picamera2()
 	picam2.still_configuration.main.size = tu.displays['4K']
 	picam2.still_configuration.main.format = 'XBGR8888'
-	picam2.still_configuration.transform = Transform(hflip=True,vflip=True)
+	picam2.still_configuration.transform = Transform(hflip=True, vflip=True)
 	#picam2.still_configuration.align()
 	picam2.configure('still')
 	picam2.start()
 
-	picam2.set_controls({"AfMode":controls.AfModeEnum.Manual,"LensPosition":0.0,"AeEnable": False, "AwbEnable": False, "FrameRate": 1.0})
-	time.sleep(1)
-	
+	picam2.set_controls({"AfMode": controls.AfModeEnum.Manual, 
+                      "LensPosition":0.0, 
+                      "AeEnable": False, 
+                      "AwbEnable": False, 
+                      "FrameRate": 1.0})
+	time.sleep(3)
 	tl.logger.info(tl.lmsg[3])
 
 	# User Inputs
@@ -31,12 +34,11 @@ try:
 	
 	tl.logger.info(tl.lmsg[4])
 
-	pictures_dir = os.path.join(os.path.expanduser('~'),'Pictures')
-	images_dir = tu.build_path(os.path.join(pictures_dir,folder_name))
+	pictures_dir = os.path.join(os.path.expanduser('~'), 'Pictures')
+	images_dir = tu.build_path(os.path.join(pictures_dir, folder_name))
 
 	tl.logger.info(tl.lmsg[5].format(images_dir))
 	tl.logger.info(tl.lmsg[6])
-	
 	
 	for i in range(1,number_images + 1):
 		img_path = os.path.join(images_dir,'{}.jpg'.format(tu.get_timestamp(True)))
