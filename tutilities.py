@@ -26,7 +26,7 @@ def get_timestamp(includeMs: bool = False):
         return dt.datetime.now().strftime('%Y%m%d--%H%M%S')
 
 def get_time_stamp():
-    return dt.datetime.now().strftime('%Y%m%d%H%M%S.%f')
+    return dt.datetime.now().strftime('%Y%m%d.%H%M%S.%f')
 
 def build_path(path, iterate_name = False):
     if os.path.exists(path) == False:
