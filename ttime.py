@@ -53,8 +53,8 @@ try:
             img_path = os.path.join(save_dir,'{}.jpg'.format(tu.get_time_stamp()))
             
             picam2.capture_file(img_path)
-            percent_complete = ('{:.1%}'.format(i/(number_images))).rjust(7," ")
-            status = " ".join([str(i), percent_complete, img_path])
+            # percent_complete = ('{:.1%}'.format(i/(number_images))).rjust(7," ")
+            status = " ".join([str(i), img_path])
             print(status)
             tl.logger.info(status)       
         else:
