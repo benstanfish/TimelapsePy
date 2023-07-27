@@ -13,7 +13,7 @@ print("Loaded")
 tl.logger.info("Test Initialized.")
 
 folder_name = 'test'
-save_dir = tu.get_preferred_path(folder_name, 'Pullman', iterate_name=False)
+# save_dir = tu.get_preferred_path(folder_name, 'Pullman', iterate_name=False)
 
 is_sleeping = True
 interval_seconds = 10
@@ -29,6 +29,7 @@ while h < 18:
             i = 0    
             os.system('echo Good Morning')
         os.system(f'echo {n}, {i}, -capture-, {dt.datetime.now()}')
+        save_dir = tu.get_preferred_path(folder_name, 'Pullman', iterate_name=False)
         img_path = os.path.join(save_dir,'{}.txt'.format(tu.get_time_stamp()))
         f = open(img_path, "w")
         f.close()
