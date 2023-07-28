@@ -9,8 +9,8 @@ import usersettings as users
 create_mp4 = True
 collected_images_directory = os.path.join((os.path.expanduser('~'),'Pictures'), users.directory_name_for_images)
 
-# Use ffmpeg to create mp4
+# For command line documentation refer to https://ffmpeg.org/ffmpeg.html
 if users.create_mp4 == True:
 	all_pics = collected_images_directory + '/*.' + utils.get_file_format(users.image_file_format)
-	os.system(f'ffmpeg -framerate {users.frame_rate} -pattern_type glob -i "{all_pics}" -c:v libx264 -y {users.video_name}.mp4')
+	os.system(f'ffmpeg -framerate {users.frame_rate} -pattern_type glob -i "{all_pics}" -codec:v libx264 -y {users.video_name}.mp4')
 
