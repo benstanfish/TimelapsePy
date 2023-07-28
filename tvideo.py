@@ -12,5 +12,5 @@ collected_images_directory = os.path.join((os.path.expanduser('~'),'Pictures'), 
 # For command line documentation refer to https://ffmpeg.org/ffmpeg.html
 if users.create_mp4 == True:
 	all_pics = collected_images_directory + '/*.' + utils.get_file_format(users.image_file_format)
-	os.system(f'ffmpeg -framerate {users.frame_rate} -pattern_type glob -i "{all_pics}" -codec:v libx264 -y {users.video_name}.mp4')
+	os.system(f'ffmpeg -framerate {users.frame_rate} -pattern_type glob -i "{all_pics}" -vcodec libx264 -y {users.video_name}.mp4')
 

@@ -79,6 +79,8 @@ try:
     os.system('Exiting program event loop.')
     log.logger.info(log.message['exit_loop'])
     
+# To run ffmpeg, run the tvideo.py script manually
+    
 except Exception as e:
 	log.logger.error(log.message['error'], 'division', exc_info=e)
 	
