@@ -22,9 +22,9 @@ capture_continuously = True
 
 # To capture images daily between the following hours, set 
 # capture_continuously = False, otherwise the following values
-# are ignored.
-capture_start_hour = 4
-capture_end_hour = 18
+# are ignored. Use 24 hour format.
+capture_start_hour = 4  # Inclusive
+capture_end_hour = 18  # Exclusive
 
 
 #======================================================================

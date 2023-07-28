@@ -51,7 +51,7 @@ try:
     while infinite_loop == True:
         if (users.capture_continuously == True) | (users.capture_continuously == False & 
                                                   (h >= users.capture_start_hour & 
-                                                   h <= users.capture_end_hour)):
+                                                   h < users.capture_end_hour)):
             if is_sleeping == True:
                 is_sleeping = False
                 i = 0    
