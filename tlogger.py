@@ -33,7 +33,8 @@ message = {
 			'sleep': 'Event loop has entered sleep cycle.',
 			'exit_loop': 'Program is naturally exiting event loop.',
    			'error': "Error at %s",
-			'final': "End of script. Program exiting."
+			'final': "End of script. Program exiting.",
+			'video_render': 'User requested auto-generated mp4 after \n time lapse loop complete. Render initiated.'
 		}
 
 print(f"tlogger.py <version {__version__}> imported.")

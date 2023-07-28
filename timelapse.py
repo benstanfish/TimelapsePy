@@ -80,8 +80,13 @@ try:
     os.system('Exiting program event loop.')
     log.logger.info(log.message['exit_loop'])
     
-# To run ffmpeg, run the tvideo.py script manually
+    if users.create_mp4 == True:
+        # To run ffmpeg, it's recommended the tvideo.py script manually
+        log.logger.info('User requested import of tvideo.py initiated.')
+        import tvideo
+        log.logger.info('User requested import of tvideo.py completed.')
     
+
 except Exception as e:
 	log.logger.error(log.message['error'], 'division', exc_info=e)
 	
