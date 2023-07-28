@@ -19,4 +19,4 @@ try:
 	os.system(f'ffmpeg -framerate {users.frame_rate} -pattern_type glob -i "{all_pics}" -c:v libx264 -y {output_path}')
 except Exception as e:
 	log.logger.error(log.message['error'], 'division', exc_info=e)
-	print("An error occured in rendering. Exiting tvideo.py.")
+	print("An error occurred in rendering. Exiting tvideo.py.")
