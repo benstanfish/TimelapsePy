@@ -1,29 +1,92 @@
-__version__ = "0.0.1"
+"""Utility functions for TimelapsePy"""
+__version__ = "0.0.3"
+__author__ = "Ben Fisher"
+
+from libcamera import controls
 
 import os
 import getpass
 import datetime as dt
 
-print(f"tutilities.py <version {__version__}> imported.")
+resolutions = {
+                'VGA': (640,480),
+                'sVGA': (800,600),
+                'XGA': (1024,768),
+                'HD': (1280,720),
+                'HD+': (1600,900),
+                'FHD': (1920,1080),
+                '1080p': (1920,1080),
+                '2K': (2560,1440),
+                '4K': (3840,2160),
+                'max':(4608,2592)
+                }
 
-displays = {
-            'VGA': (640,480),
-            'sVGA': (800,600),
-            'XGA': (1024,768),
-            'HD': (1280,720),
-            'HD+': (1600,900),
-            'FHD': (1920,1080),
-            '1080p': (1920,1080),
-            '2K': (2560,1440),
-            '4K': (3840,2160),
-            }
+image_formats = {
+                'XBGR8888': 'XBGR8888',
+                'XRBG8888': 'XRBG8888',
+                'BGR888': 'BGR888',
+                'RGB888': 'RGB888',
+                'YUV420': 'YUV420',
+                'YVU420': 'YVU420',
+                'default': 'BGR888'
+                }
 
-def get_timestamp(includeMs: bool = False):
-    # LEGACY: Do not use for new projects
-    if includeMs == True:
-        return dt.datetime.now().strftime('%Y%m%d--%H%M%S-%f')
+focal_modes = {
+                'default': controls.AfModeEnum.AfModeManual,
+                'manual': controls.AfModeEnum.AfModeManual,
+                'automatic': controls.AfModeEnum.AfModeAuto,
+                'continuous': controls.AfModeEnum.AfModeContinuous                
+                }
+
+file_formats = {
+                'jpg': 'jpg',
+                'jpeg': 'jpg',
+                'png': 'png',
+                'bmp': 'bmp',
+                '.jpg': 'jpg',
+                '.jpeg': 'jpg',
+                '.png': 'png',
+                '.bmp': 'bmp',
+                'default': 'jpg'
+                }
+
+def get_resolution(resolution):
+    try:
+        return resolutions[resolution]
+    except KeyError:
+        return resolutions['max']
+
+def get_image_format(format):
+    try:
+        return image_formats[format]
+    except KeyError:
+        return image_formats['default']
+
+def get_focal_mode(focal_mode: str):
+    try:
+        return focal_modes[focal_mode.lower()]
+    except KeyError:
+        return focal_modes['default']   
+
+def get_focal_distance(focal_distance: float):
+    if focal_distance <= 0.0:
+        return 0
+    elif focal_distance >= 10.0:
+        return 10
     else:
-        return dt.datetime.now().strftime('%Y%m%d--%H%M%S')
+        return focal_distance
+
+def get_file_format(file_format: str):
+    try:
+        return file_formats[file_format.lower()]
+    except KeyError:
+        return file_formats['jpg']   
+    
+def get_iterate_name(iterate_name: bool):
+    try:
+        return iterate_name
+    except:
+        return False
 
 def get_time_stamp():
     return dt.datetime.now().strftime('%Y%m%d.%H%M%S.%f')
@@ -37,7 +100,8 @@ def build_path(path, iterate_name = False):
     return path
 
 def next_path(path):
-    """Creates a candidate path name that will not conflict with indexed predecessors. Uses log(n) time algorithm to check existence of predecessor names (rather than using sequential iteration)
+    """Creates a candidate path name that will not conflict with indexed predecessors. 
+    Uses log(n) time algorithm to check existence of predecessor names (rather than using sequential iteration)
     """
     i = 1
     while os.path.exists(path + " " + str(i)):
@@ -64,3 +128,5 @@ def get_hour_and_minute():
     h = int(dt.datetime.strftime(now, "%H"))
     m = int(dt.datetime.strftime(now, "%M")) 
     return h, m
+
+print(f"tutilities.py <version {__version__}> imported.")

@@ -1,8 +1,10 @@
-print('tlogger.py successfully imported')
+"""Logging functions for TimelapsePy"""
+__version__ = "0.0.2"
+__author__ = "Ben Fisher"
 
 import logging
 
-logger = logging.getLogger('timelapsepy')
+logger = logging.getLogger('TimelapsePy')
 logger.setLevel(logging.DEBUG)
 
 fileHandler = logging.FileHandler('tl.log')
@@ -18,18 +20,20 @@ consoleHandler.setFormatter(formatter)
 logger.addHandler(fileHandler)
 logger.addHandler(consoleHandler)
 
-lmsg = {
-		0: "-"*79,
-		1: "",
-		2: "TimelapsePy script initialized",
-		3: "imports complete",
-		4: "parameters set",
-		5: "directory path built: {}",
-		6: "image capture cycle initialized",
-		7: "image capture cycle completed",
-		8: "image to video render initialized",
-		9: "video rendering complete",
-		99: "error at %s",
-		999: "end of script"
+message = {
+			0: "-" * 75,
+			1: "",
+			'log_start': 'Logger successfully initialized.',
+			'imports': 'Imports successfully completed.',
+			'configuration': 'Camera configurations completed.',
+			'camera_start' : 'Camera started.',
+			'controls': 'Camera controls set.',
+			'loop_ready': 'Program will enter event loop now.',
+			'awake': 'Event loop sleep cycle discontinued.',
+			'sleep': 'Event loop has entered sleep cycle.',
+			'exit_loop': 'Program is naturally exiting event loop.',
+   			'error': "Error at %s",
+			'final': "End of script. Program exiting."
 		}
 
+print(f"tlogger.py <version {__version__}> imported.")

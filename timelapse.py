@@ -1,67 +1,86 @@
-import tlogger as tl
-tl.logger.info(tl.lmsg[0])
+"""TimelapsePy main module"""
+__version__ = "0.0.10"
+__author__ = "Ben Fisher"
+
+import tlogger as log
+log.logger.info(log.message['log_start'])
 
 try:
-	from picamera2 import Picamera2, Preview
-	from libcamera import Transform, controls
-	import time, datetime
-	import os, sys
-	import tutilities as tu
-	
-	tl.logger.info(tl.lmsg[2])
+    import os
+    from time import sleep
+    import datetime as dt
+    
+    from picamera2 import Picamera2, Preview
+    from libcamera import Transform, controls
 
-	picam2 = Picamera2()
-	picam2.still_configuration.main.size = tu.displays['4K']
-	picam2.still_configuration.main.format = 'XBGR8888'
-	picam2.still_configuration.transform = Transform(hflip=True, vflip=True)
-	#picam2.still_configuration.align()
-	picam2.configure('still')
-	picam2.start()
+    import usersettings as users
+    import tutilities as util
 
-	picam2.set_controls({"AfMode": controls.AfModeEnum.Manual, 
-                      "LensPosition":0.0, 
-                      "AeEnable": False, 
-                      "AwbEnable": False, 
-                      "FrameRate": 1.0})
-	time.sleep(3)
-	tl.logger.info(tl.lmsg[3])
+    log.logger.info(log.message['imports'])
 
-	# User Inputs
-	number_images = 5
-	capture_interval = 1
-	folder_name = 'timelapse'
-	create_mp4 = False
-	
-	tl.logger.info(tl.lmsg[4])
+    picam2 = Picamera2()
+    picam2.still_configuration.main.size = util.get_resolution(users.resolution)
+    picam2.still_configuration.main.format = util.get_image_format(users.image_format)
+    picam2.still_configuration.transform = Transform(hflip = users.flip_horizontal,
+                                                     vflip = users.flip_horizontal)
+    picam2.configure('still')
+    log.logger.info(log.message['configuration'])
+    
+    picam2.start()
+    log.logger.info(log.message['camera_start'])
+    
+    sleep(3)
+    
+    picam2.set_controls({"AfMode": util.get_focal_mode(users.user_focus_mode), 
+                         "LensPosition": util.get_focal_distance(users.user_focal_distance)})
+    log.logger.info(log.message['controls'])
 
-	pictures_dir = os.path.join(os.path.expanduser('~'), 'Pictures')
-	images_dir = tu.build_path(os.path.join(pictures_dir, folder_name))
+    infinite_loop = True
+    is_sleeping = True
+    n = 0
+    i = 0
+    h, m = util.get_hour_and_minute()
 
-	tl.logger.info(tl.lmsg[5].format(images_dir))
-	tl.logger.info(tl.lmsg[6])
-	
-	for i in range(1,number_images + 1):
-		img_path = os.path.join(images_dir,'{}.jpg'.format(tu.get_time_stamp()))
-		picam2.capture_file(img_path)
-		percent_complete = ('{:.1%}'.format(i/(number_images))).rjust(7," ")
-		status = " ".join([str(i), percent_complete, img_path])
-		print(status)
-		tl.logger.info(status)
-		time.sleep(capture_interval)
 
-	tl.logger.info(tl.lmsg[7])
+    log.logger.info(log.message['loop_ready'])
+    log.logger.debug(f'Continuous capture mode: {users.capture_continuously}')
+    log.logger.debug(f'Capture start hour: {users.capture_start_hour}')
+    log.logger.debug(f'Capture start hour: {users.capture_end_hour}')
 
-	# Use ffmpeg to create mp4
-	if create_mp4 == True:
-		tl.logger.info(tl.lmsg[8])
-		all_pics = images_dir + '/*.jpg'
-		system('ffmpeg -framerate 24 -pattern_type glob -i "{}" -c:v libx264 -r 30 -y output-test.mp4'.format(all_pics))
-		tl.logger.info(tl.lmsg[9])
-	picam2.close()
-
+    while infinite_loop == True:
+        if (users.capture_continuously == True) | (users.capture_continuously == False & 
+                                                  (h >= users.capture_start_hour & 
+                                                   h <= users.capture_end_hour)):
+            if is_sleeping == True:
+                is_sleeping = False
+                i = 0    
+                log.logger.info(log.message['awake'])
+            
+            save_dir = util.get_preferred_path(users.directory_name_for_images, 
+                                               users.external_drive_name, 
+                                               iterate_name = util.get_iterate_name(users.unique_directory_name))
+            img_path = os.path.join(save_dir,f'{util.get_time_stamp()}.{util.get_file_format(users.image_file_format)}')
+            
+            picam2.capture_file(img_path)
+            
+            status = " ".join([str(n).rjust(6, " "), str(i).rjust(6, " "), dt.datetime.now(), img_path])
+            os.system(f'echo {status}')
+            log.logger.info("Capture event: " + status)       
+        else:
+            if is_sleeping == False:
+                i = 0
+                is_sleeping = True
+                log.logger.info('sleep')
+            os.system(f'echo {n}, Sleeping, {dt.datetime.now()}')
+        sleep(users.interval_in_seconds_between_capture)
+        h, m = util.get_hour_and_minute()
+        n += 1
+        i += 1
+    os.system('Exiting program event loop.')
+    log.logger.info(log.message['exit_loop'])
+    
 except Exception as e:
-	tl.logger.error(tl.lmsg[99],'division',exc_info=e)
+	log.logger.error(log.message['error'], 'division', exc_info=e)
 	
 finally:
-	tl.logger.info(tl.lmsg[999])
-
+	log.logger.info(log.message['final'])
