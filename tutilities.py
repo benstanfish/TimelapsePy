@@ -9,33 +9,32 @@ import getpass
 import datetime as dt
 
 resolutions = {
-                'VGA': (640,480),
-                'sVGA': (800,600),
-                'XGA': (1024,768),
-                'HD': (1280,720),
-                'HD+': (1600,900),
-                'FHD': (1920,1080),
+                'vga': (640,480),
+                'svga': (800,600),
+                'xga': (1024,768),
+                'hd': (1280,720),
+                'hd+': (1600,900),
+                'fhd': (1920,1080),
                 '1080p': (1920,1080),
-                '2K': (2560,1440),
-                '4K': (3840,2160),
-                'max':(4608,2592)
+                '2k': (2560,1440),
+                '4k': (3840,2160),
+                'max': (4608,2592),
+                'default': (4608,2592)
                 }
 
 image_formats = {
-                'XBGR8888': 'XBGR8888',
-                'XRBG8888': 'XRBG8888',
-                'BGR888': 'BGR888',
-                'RGB888': 'RGB888',
-                'YUV420': 'YUV420',
-                'YVU420': 'YVU420',
+                'xbgr8888': 'XBGR8888',
+                'xrgb8888': 'XRBG8888',
+                'bgr888': 'BGR888',
+                'rgb888': 'RGB888',
                 'default': 'BGR888'
                 }
 
 focal_modes = {
-                'default': controls.AfModeEnum.AfModeManual,
-                'manual': controls.AfModeEnum.AfModeManual,
-                'automatic': controls.AfModeEnum.AfModeAuto,
-                'continuous': controls.AfModeEnum.AfModeContinuous                
+                'default': controls.AfModeEnum.Manual,
+                'manual': controls.AfModeEnum.Manual,
+                'automatic': controls.AfModeEnum.Auto,
+                'continuous': controls.AfModeEnum.Continuous                
                 }
 
 file_formats = {
@@ -50,15 +49,15 @@ file_formats = {
                 'default': 'jpg'
                 }
 
-def get_resolution(resolution):
+def get_resolution(resolution: str):
     try:
-        return resolutions[resolution]
+        return resolutions[resolution.lower()]
     except KeyError:
         return resolutions['max']
 
-def get_image_format(format):
+def get_image_format(format: str):
     try:
-        return image_formats[format]
+        return image_formats[format.lower()]
     except KeyError:
         return image_formats['default']
 

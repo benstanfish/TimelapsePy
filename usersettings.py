@@ -50,7 +50,7 @@ user_focal_distance = 0
 #                        Render to mp4 video
 #======================================================================
 
-create_mp4 = False
+create_mp4 = True
 video_name = "video"
 frame_rate = 24
 

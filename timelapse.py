@@ -3,6 +3,7 @@ __version__ = "0.0.10"
 __author__ = "Ben Fisher"
 
 import tlogger as log
+log.logger.info(log.message[0])
 log.logger.info(log.message['log_start'])
 
 try:
@@ -63,7 +64,7 @@ try:
             
             picam2.capture_file(img_path)
             
-            status = " ".join([str(n).rjust(6, " "), str(i).rjust(6, " "), dt.datetime.now(), img_path])
+            status = " ".join([str(n).rjust(6, " "), str(i).rjust(6, " "), str(dt.datetime.now()), img_path])
             os.system(f'echo {status}')
             log.logger.info("Capture event: " + status)       
         else:

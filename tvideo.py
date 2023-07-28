@@ -4,13 +4,18 @@ __author__ = "Ben Fisher"
 
 import os
 import tutilities as utils
+import tlogger as log
 import usersettings as users
 
 create_mp4 = True
-collected_images_directory = os.path.join((os.path.expanduser('~'),'Pictures'), users.directory_name_for_images)
+collected_images_directory = os.path.join(os.path.expanduser('~'),'Pictures', users.directory_name_for_images)
+output_path = os.path.join(os.path.expanduser('~'), 'Videos', f'{users.video_name}.mp4')
 
 # For command line documentation refer to https://ffmpeg.org/ffmpeg.html
 if users.create_mp4 == True:
-	all_pics = collected_images_directory + '/*.' + utils.get_file_format(users.image_file_format)
-	os.system(f'ffmpeg -framerate {users.frame_rate} -pattern_type glob -i "{all_pics}" -vcodec libx264 -y {users.video_name}.mp4')
-
+	try:
+		all_pics = collected_images_directory + '/*.' + utils.get_file_format(users.image_file_format)
+		os.system(f'ffmpeg -framerate {users.frame_rate} -pattern_type glob -i "{all_pics}" -c:v libx264 -y {output_path}')
+	except Exception as e:
+		log.logger.error(log.message['error'], 'division', exc_info=e)
+		print("An error occured in rendering. Exiting tvideo.py.")
