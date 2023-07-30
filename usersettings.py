@@ -33,6 +33,7 @@ capture_end_hour = 18  # Exclusive
 
 resolution = 'max'
 image_format = 'default'
+image_quality = 90
 
 flip_horizontal = False
 flip_vertical = False
