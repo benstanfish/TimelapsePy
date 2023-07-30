@@ -7,7 +7,7 @@ import logging
 logger = logging.getLogger('TimelapsePy')
 logger.setLevel(logging.DEBUG)
 
-fileHandler = logging.FileHandler('tl.log')
+fileHandler = logging.FileHandler('timelapsepy.log')
 fileHandler.setLevel(logging.DEBUG)
 
 consoleHandler = logging.StreamHandler()

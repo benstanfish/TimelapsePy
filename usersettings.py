@@ -7,8 +7,8 @@ __author__ = "Ben Fisher"
 #                      Settings for save locations
 #======================================================================
 
-directory_name_for_images = 'timelapse_images'
-external_drive_name = 'Pullman'
+absolute_path_for_images = '/home/pi/timelapses/tmp'
+absolute_path_for_videos = '/home/pi/timelapses'
 unique_directory_name = False  # Recommend keeping this default = False
 
 #======================================================================

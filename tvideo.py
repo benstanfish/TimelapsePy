@@ -9,8 +9,8 @@ import tutilities as utils
 import tlogger as log
 import usersettings as users
 
-collected_images_directory = os.path.join(os.path.expanduser('~'),'Pictures', users.directory_name_for_images)
-output_path = os.path.join(os.path.expanduser('~'), 'Videos', f'{users.video_name}.mp4')
+collected_images_directory = os.path.join(users.absolute_path_for_images)
+output_path = os.path.join(users.absolute_path_for_videos, f'{users.video_name}.mp4')
 
 # For command line documentation refer to https://ffmpeg.org/ffmpeg.html
 try:
