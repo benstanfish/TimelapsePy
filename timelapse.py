@@ -31,10 +31,10 @@ try:
     log.logger.info(log.message['camera_start'])
     
     sleep(3)
-    
-    picam2.set_controls({"AfMode": util.get_focal_mode(users.user_focus_mode), 
-                         "LensPosition": util.get_focal_distance(users.user_focal_distance)})
-    log.logger.info(log.message['controls'])
+
+#    picam2.set_controls({"AfMode": util.get_focal_mode(users.user_focus_mode), 
+#                         "LensPosition": util.get_focal_distance(users.user_focal_distance)})
+#    log.logger.info(log.message['controls'])
 
     infinite_loop = True
     is_sleeping = True
