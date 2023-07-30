@@ -60,7 +60,7 @@ try:
             save_dir = util.get_preferred_path(users.directory_name_for_images, 
                                                users.external_drive_name, 
                                                iterate_name = util.get_iterate_name(users.unique_directory_name))
-            img_path = os.path.join(save_dir,f'{util.get_time_stamp()}.{util.get_file_format(users.image_file_format)}')
+            img_path = os.path.join(save_dir, f'{util.get_time_stamp(users.ms_in_the_filename)}.{util.get_file_format(users.image_file_format)}')
             
             picam2.capture_file(img_path)
             

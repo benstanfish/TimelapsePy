@@ -10,6 +10,9 @@ __author__ = "Ben Fisher"
 directory_name_for_images = 'timelapse_images'
 external_drive_name = 'Pullman'
 unique_directory_name = False  # Recommend keeping this default = False
+# Whether save the microseconds in the filename (%Y%m%d_%H%M%S_%f) or
+# just save a date and time (%Y%m%d_%H%M%S).
+ms_in_the_filename = True
 
 #======================================================================
 #                 Basic settings for capturing images
