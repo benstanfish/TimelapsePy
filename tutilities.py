@@ -60,6 +60,14 @@ def get_image_format(format: str):
         return image_formats[format.lower()]
     except KeyError:
         return image_formats['default']
+        
+def get_image_quality(quality: int):
+    if quality < 0:
+        return 0
+    elif quality > 100:
+        return 100
+    else:
+        return quality
 
 def get_focal_mode(focal_mode: str):
     try:
