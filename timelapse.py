@@ -34,9 +34,16 @@ try:
     
     sleep(3)
 
-#    picam2.set_controls({"AfMode": util.get_focal_mode(users.user_focus_mode), 
-#                         "LensPosition": util.get_focal_distance(users.user_focal_distance)})
-#    log.logger.info(log.message['controls'])
+    # Retrieve camera's metadata and log it.
+    metadata = picam2.capture_metadata()
+    log.logger.info(metadata)
+
+    # If our camera supports the control, set it to our desired value.
+    if "AfMode" in metadata:
+        picam2.set_controls({"AfMode": util.get_focal_mode(users.user_focus_mode)})
+    if "LensPosition" in metadata:
+        picam2.set_controls({"LensPosition": util.get_focal_distance(users.user_focal_distance)})
+    log.logger.info(log.message['controls'])
 
     infinite_loop = True
     is_sleeping = True
