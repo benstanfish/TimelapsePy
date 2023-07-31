@@ -56,4 +56,4 @@ video_name = "video"
 frame_rate = 24
 
 # DO NOT EDIT BELOW THIS LINE
-print(f"usersettings.py <version {__version__}> imported.")
+print(f'{__name__} <version {__version__}> successfully imported')

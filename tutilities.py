@@ -139,4 +139,4 @@ def get_hour_and_minute():
     m = int(dt.datetime.strftime(now, "%M")) 
     return h, m
 
-print(f"tutilities.py <version {__version__}> imported.")
+print(f'{__name__} <version {__version__}> successfully imported')

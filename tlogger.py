@@ -37,4 +37,4 @@ message = {
 			'video_render': 'User requested auto-generated mp4 after \n time lapse loop complete. Render initiated.'
 		}
 
-print(f"tlogger.py <version {__version__}> imported.")
+print(f'{__name__} <version {__version__}> successfully imported')

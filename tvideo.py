@@ -2,7 +2,7 @@
 __version__ = "0.0.5"
 __author__ = "Ben Fisher"
 
-print(f"tvideo.py <version {__version__}> imported.")
+print(f'{__name__} <version {__version__}> successfully imported')
 
 import os
 import tutilities as utils
