@@ -87,8 +87,11 @@ def get_iterate_name(iterate_name: bool):
     except:
         return False
 
-def get_time_stamp():
-    return dt.datetime.now().strftime('%Y%m%d.%H%M%S.%f')
+def get_time_stamp(include_milliseconds = False):
+    if include_milliseconds == True:
+        return dt.datetime.now().strftime('%Y%m%d.%H%M%S.%f')
+    else:
+        return dt.datetime.now().strftime('%Y%m%d.%H%M%S')
 
 def build_path(path, iterate_name = False):
     if os.path.exists(path) == False:
