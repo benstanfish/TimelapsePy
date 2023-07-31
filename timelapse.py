@@ -20,6 +20,8 @@ try:
     log.logger.info(log.message['imports'])
 
     picam2 = Picamera2()
+    picam2.options["quality"] = util.get_image_quality(users.image_quality)
+    
     picam2.still_configuration.main.size = util.get_resolution(users.resolution)
     picam2.still_configuration.main.format = util.get_image_format(users.image_format)
     picam2.still_configuration.transform = Transform(hflip = users.flip_horizontal,
